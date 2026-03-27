@@ -13,70 +13,38 @@ body {
     -webkit-tap-highlight-color: transparent;
 }
 
-/* HEADER */
-header { padding: 45px 20px 10px; text-align: center; }
-.logo-redondo img { width: 85px; height: 85px; border-radius: 50%; border: 2px solid var(--dorado); box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
-h1 { font-family: 'Playfair Display', serif; color: var(--dorado-brillante); letter-spacing: 4px; margin: 10px 0 0; }
-.badge-premium { font-size: 0.6rem; border: 1px solid var(--dorado); padding: 3px 12px; color: var(--dorado); letter-spacing: 2px; display: inline-block; }
-
-/* PROMOS */
-.seccion-promos { padding: 15px; }
-.promo-card {
-    position: relative; background: var(--glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--dorado); border-radius: 18px; padding: 25px; overflow: hidden; text-align: center;
-}
-.promo-brillo {
-    position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-    background: linear-gradient(to right, transparent, rgba(255,255,255,0.15), transparent);
-    transform: skewX(-25deg); animation: brillo 4s infinite;
-}
-@keyframes brillo { 0% { left: -100%; } 20% { left: 150%; } 100% { left: 150%; } }
-
-/* NAV MADERA Y METAL */
-.contenedor-cartel { position: sticky; top: 0; z-index: 1000; padding: 12px 0; }
-.cartel-madera-metal {
-    background: linear-gradient(145deg, #1a1a1a, #050505);
-    margin: 0 15px; border-radius: 50px; border: 1px solid rgba(212, 175, 55, 0.4);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.8); padding: 6px;
-}
-.scroll-wrapper { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
-.scroll-wrapper::-webkit-scrollbar { display: none; }
-.filtro-btn { flex: 0 0 auto; background: transparent; color: #888; border: none; padding: 10px 22px; font-weight: 600; font-size: 0.75rem; transition: 0.3s; }
-.filtro-btn.activo {
-    background: linear-gradient(135deg, #bf953f, #fcf6ba, #aa771c);
-    color: black; border-radius: 50px; box-shadow: 0 0 15px var(--dorado);
-}
-
-/* --- GRID PRODUCTOS (FOTO, NOMBRE Y PRECIO VISIBLES) --- */
+/* --- GRID PRINCIPAL --- */
 #menu-container {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Dos platos por fila en móvil */
-    gap: 12px;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
     padding: 15px;
 }
 
+/* CARD CORREGIDA */
 .card-premium {
-    background: rgba(20, 20, 20, 0.5); /* Súper transparente */
-    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    background: rgba(20, 20, 20, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-radius: 18px;
-    border: 1px solid rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
     overflow: hidden;
-    display: flex;
+    display: flex; /* Aseguramos que sea flex */
     flex-direction: column;
-    height: 100%; /* Obliga a todas a medir lo mismo verticalmente */
+    height: 100%;
+    transition: transform 0.3s;
 }
 
 .card-img {
     width: 100%;
-    height: 140px; /* ALTURA FIJA: Asegura la simetría */
+    height: 140px;
     object-fit: cover;
-    filter: brightness(0.9);
 }
 
 .card-info {
     padding: 12px;
     text-align: center;
-    flex-grow: 1; /* Empuja el precio al fondo de la tarjeta */
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -85,43 +53,55 @@ h1 { font-family: 'Playfair Display', serif; color: var(--dorado-brillante); let
 .card-info h3 {
     font-family: 'Playfair Display', serif;
     font-size: 0.9rem;
-    margin: 0 0 5px;
-    min-height: 2.4rem; /* RESERVA ESPACIO: Para 2 líneas de texto */
+    margin: 5px 0;
+    min-height: 2.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    line-height: 1.2;
 }
 
 .card-precio {
     color: var(--dorado-brillante);
     font-weight: bold;
     font-size: 1.1rem;
-    margin-top: auto; /* Anclaje visual del precio */
+    margin-top: 5px;
 }
 
-/* MODAL */
-.modal { display: none; position: fixed; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 2000; align-items: flex-end; }
-.modal-contenido { background: #0a0a0a; width: 100%; border-radius: 35px 35px 0 0; border-top: 2px solid var(--dorado); padding-bottom: 40px; }
-.indicador-cierre { width: 45px; height: 5px; background: #333; margin: 15px auto; border-radius: 10px; }
-#modal-img { width: 100%; height: 240px; object-fit: cover; }
-.modal-body { padding: 30px; text-align: center; }
-#modal-titulo { font-family: 'Playfair Display', serif; color: var(--dorado-brillante); font-size: 1.9rem; margin: 0; }
-
+/* --- DESCRIPCIÓN PREMIUM EN MODAL --- */
 #modal-descripcion {
-    font-family: 'Poppins', sans-serif; font-weight: 300; color: #bbb;
-    line-height: 1.8; margin: 15px 0 25px; font-size: 0.95rem;
-    position: relative; padding-top: 15px;
+    font-family: 'Poppins', sans-serif;
+    color: #bbb;
+    line-height: 1.8;
+    margin: 20px 0;
+    font-size: 0.95rem;
+    position: relative;
+    padding-top: 15px;
 }
-#modal-descripcion::before { content: "✧"; position: absolute; top: -5px; left: 50%; transform: translateX(-50%); color: var(--dorado); font-size: 1.2rem; }
 
-.precio-modal { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: white; margin-bottom: 25px; }
+#modal-descripcion::before {
+    content: "✧";
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--dorado);
+    font-size: 1.2rem;
+}
 
-/* BOTÓN WA */
+/* BOTÓN WHATSAPP PREMIUM */
 .btn-wa-premium {
     background: linear-gradient(135deg, #25d366, #128c7e);
-    color: white; border: none; width: 100%; padding: 18px;
-    border-radius: 50px; font-weight: bold; font-size: 1rem;
-    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.35);
-    display: flex; align-items: center; justify-content: center; gap: 12px;
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 18px;
+    border-radius: 50px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);
 }
+
+/* ... Mantener estilos del Header y Nav que ya tenías ... */
