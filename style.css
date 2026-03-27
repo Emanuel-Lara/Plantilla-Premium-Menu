@@ -1,107 +1,457 @@
+/* --- VARIABLES DE DISEÑO PREMIUM --- */
 :root {
-    --dorado: #d4af37;
     --dorado-brillante: #f1d37e;
+    --dorado: #d4af37;
+    --dorado-oscuro: #b8860b;
     --oscuro: #0a0a0a;
-    --tarjeta: rgba(20, 20, 20, 0.95);
+    --tarjeta: rgba(22, 22, 22, 0.85);
+    --blanco: #ffffff;
+    --glass: rgba(15, 15, 15, 0.9);
 }
 
+/* --- BASE Y FONDO ATMOSFÉRICO --- */
 body {
-    background-color: var(--oscuro);
-    background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('fondo-premium.jpg');
+    background-image: linear-gradient(
+        rgba(0, 0, 0, 0.85), 
+        rgba(0, 0, 0, 0.75)
+    ), url('fondo-premium.jpg'); /* Asegúrate de tener esta imagen en tu carpeta */
     background-size: cover;
-    background-attachment: fixed;
-    color: white;
+    background-position: center;
+    background-attachment: fixed; /* Efecto Parallax de lujo */
+    background-repeat: no-repeat;
+    color: var(--blanco);
     font-family: 'Lato', sans-serif;
     margin: 0;
     overflow-x: hidden;
+    line-height: 1.6;
 }
 
-header { padding: 40px 20px; text-align: center; }
+/* --- CABECERA (LOGO Y TÍTULO ORO) --- */
+header {
+    padding: 60px 20px 40px;
+    text-align: center;
+}
+
+.logo-redondo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid var(--dorado);
+    margin: 0 auto 20px;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+    background: #000;
+}
 
 .logo-redondo img {
-    width: 80px; 
-    height: 80px;
-    border-radius: 50%;
-    border: 2px solid var(--dorado);
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    margin-bottom: 10px;
 }
 
-h1 {
+header h1 {
     font-family: 'Cormorant Garamond', serif;
-    letter-spacing: 4px;
-    background: linear-gradient(to bottom, #fff, var(--dorado-brillante));
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 10px;
+    /* Efecto Oro Metálico */
+    background: linear-gradient(to bottom, var(--dorado-brillante) 20%, var(--dorado-oscuro) 80%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 2.2rem;
-    margin: 0;
+    text-shadow: 0 10px 20px rgba(0,0,0,0.5);
 }
 
-/* NAVEGACIÓN DESLIZABLE */
-.contenedor-cartel-navegacion { position: sticky; top: 0; z-index: 2000; width: 100%; }
-.cartel-madera-metal { 
-    background: rgba(15, 15, 15, 0.9) !important; 
-    backdrop-filter: blur(10px);
-    width: 92%; max-width: 800px; margin: 10px auto; 
-    border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 50px; 
+.badge-premium {
+    font-family: 'Montserrat', sans-serif;
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #000;
+    background: var(--dorado);
+    padding: 4px 15px;
+    border-radius: 50px;
+    margin-top: 15px;
+    box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
 }
-.scroll-wrapper { 
-    display: flex; gap: 10px; padding: 10px 20px; overflow-x: auto; 
-    scrollbar-width: none; -webkit-overflow-scrolling: touch;
+
+/* --- RECREACIÓN DE LA BARRA-CARTEL FÍSICA --- */
+.contenedor-cartel-navegacion {
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+    padding: 30px 0 15px; /* 🔼 Aumentamos padding superior/inferior */
+    display: flex;
+    justify-content: center;
 }
+
+.cartel-madera-metal {
+    /* ... (mantenemos los gradientes y bordes igual) ... */
+    
+    max-width: 95%; /* 🔼 Un poco más ancho en móviles */
+    width: 700px;   /* 🔼 Aumentamos el ancho máximo (de 600px a 700px) */
+    overflow: hidden;
+}
+
+/* --- Parte Superior (Logo y Título) --- */
+.header-cartel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px 30px 15px; /* 🔼 Aumentamos padding interno */
+    /* gap: 15px; ❌ Eliminado ya que no hay icono */
+}
+
+.logo-luna-ico {
+    width: 25px; /* Pequeño y elegante como en la imagen */
+    height: 25px;
+    object-fit: contain;
+}
+
+.titulo-cartel {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; /* 🔼 Letra un poco más grande y legible */
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 6px; /* 🔼 Espaciado más elegante */
+    
+    /* ... (mantenemos el efecto oro metálico sutil) ... */
+}
+
+/* --- Separador de Metal Sutil --- */
+.separador-cartel {
+    width: 80%;
+    height: 1px;
+    background: radial-gradient(
+        circle, 
+        rgba(184, 134, 11, 0.6) 0%, 
+        transparent 100%
+    );
+    margin: 0 auto;
+}
+
+/* --- Ajuste de la Barra de Filtros Inferior --- */
+.cartel-madera-metal .barra-filtros-premium {
+    padding: 15px 0 25px; /* 🔼 Aumentamos padding inferior */
+}
+
+.cartel-madera-metal .scroll-wrapper {
+    justify-content: center;
+    gap: 20px; /* 🔼 Más espacio entre botones */
+    padding: 5px 30px;
+}
+
+.cartel-madera-metal .filtro-btn span:not(.icon) {
+    font-size: 0.75rem; /* 🔼 Letra un poco más grande y clara */
+}
+
+.indicador-categoria {
+    font-family: 'Cormorant Garamond', serif;
+    text-align: center;
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    color: var(--dorado);
+    font-weight: 600;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.scroll-wrapper {
+    display: flex;
+    gap: 20px;
+    padding: 5px 25px 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+
 .scroll-wrapper::-webkit-scrollbar { display: none; }
 
 .filtro-btn {
-    flex: 0 0 auto;
-    background: rgba(255,255,255,0.05); color: white; border: 1px solid rgba(255,255,255,0.1);
-    padding: 8px 18px; border-radius: 50px; font-size: 0.75rem; cursor: pointer;
-}
-.filtro-btn.activo {
-    background: linear-gradient(135deg, #bf953f, #fcf6ba, #aa771c);
-    color: #000; font-weight: bold; border: none;
+    background: rgba(40, 40, 40, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-radius: 20px;
+    cursor: pointer;
+    min-width: 90px;
+    padding: 15px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* GRID DE PRODUCTOS (Ventanillas de Menú) */
+.btn-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.filtro-btn .icon { font-size: 1.5rem; }
+.filtro-btn span:not(.icon) { 
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem; 
+    font-weight: 600; 
+    text-transform: uppercase;
+}
+
+.filtro-btn.activo {
+    background: linear-gradient(135deg, var(--dorado-brillante), var(--dorado));
+    color: #000;
+    border: none;
+    transform: scale(1.1) translateY(-5px);
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.5);
+}
+
+/* --- ESTILO DE TARJETAS DE PROMO --- */
+.seccion-promos-premium {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.tarjeta-promo-dorada {
+    background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+    border: 2px solid var(--dorado-brillante);
+    border-radius: 15px;
+    padding: 25px;
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+    text-align: center;
+}
+
+.promo-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--dorado-brillante);
+    color: #000;
+    font-weight: bold;
+    font-size: 0.7rem;
+    padding: 5px 15px;
+    border-bottom-left-radius: 15px;
+    letter-spacing: 1px;
+}
+
+.promo-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--dorado-brillante);
+    font-size: 1.6rem;
+    margin-bottom: 5px;
+}
+
+.promo-descripcion {
+    color: #ccc;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.promo-precio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.precio-antes {
+    text-decoration: line-through;
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.precio-ahora {
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255,255,255,0.2);
+}
+
+/* Animación de Brillo que cruza la tarjeta */
+.promo-brillo {
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(212, 175, 55, 0.2),
+        transparent
+    );
+    transform: skewX(-25deg);
+    transition: 0.5s;
+    animation: shimmer 4s infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -150%; }
+    20% { left: 150%; }
+    100% { left: 150%; }
+}
+/* --- CUADRÍCULA DE PLATOS (GRID CENTRADO) --- */
 #menu-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 20px; padding: 25px; max-width: 1100px; margin: 0 auto;
-}
-.card-premium { background: var(--tarjeta); border-radius: 12px; overflow: hidden; border: 1px solid #222; cursor: pointer; transition: 0.3s; }
-.card-img { width: 100%; height: 180px; object-fit: cover; }
-.card-info { padding: 15px; text-align: center; }
-.card-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; margin-bottom: 5px; }
-.card-precio { color: var(--dorado-brillante); font-weight: bold; }
-
-/* MODAL PEQUEÑO Y CORREGIDO */
-.modal { 
-    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-    background: rgba(0,0,0,0.95); z-index: 9999; justify-content: center; align-items: center; padding: 15px;
-}
-.modal-contenido { 
-    background: #111; max-width: 380px; width: 100%; 
-    max-height: 85vh; /* Evita que se salga de la pantalla */
-    border-radius: 15px; border: 1px solid var(--dorado-oscuro); 
-    display: flex; flex-direction: column; overflow: hidden; position: relative;
-}
-.cerrar { position: absolute; top: 10px; right: 15px; color: white; font-size: 30px; cursor: pointer; z-index: 10; }
-
-#modal-img { width: 100%; height: 180px; object-fit: cover; flex-shrink: 0; }
-
-.modal-body { 
-    padding: 20px; text-align: center; 
-    overflow-y: auto; /* Permite scroll interno si el texto es largo */
-    flex-grow: 1; 
-}
-#modal-titulo { font-family: 'Cormorant Garamond', serif; color: var(--dorado-brillante); font-size: 1.7rem; margin-top: 0; }
-#modal-descripcion { font-size: 0.9rem; color: #ccc; margin-bottom: 15px; }
-
-.maridaje-box {
-    background: rgba(212, 175, 55, 0.05); border-left: 2px solid var(--dorado);
-    padding: 10px; margin: 10px 0; font-family: 'Cormorant Garamond', serif;
-    font-style: italic; color: var(--dorado-brillante); font-size: 0.95rem;
+    grid-template-columns: repeat(auto-fill, 240px);
+    justify-content: center;
+    gap: 30px;
+    padding: 40px 20px;
+    max-width: 1300px;
+    margin: 0 auto;
 }
 
-.modal-footer { padding: 0 20px 20px; display: flex; flex-direction: column; gap: 10px; align-items: center; }
-#modal-precio { font-size: 1.4rem; font-weight: bold; }
-.btn-wa { background: #25d366; color: white; border: none; padding: 12px; border-radius: 50px; width: 100%; font-weight: bold; cursor: pointer; }
+.card-premium {
+    background: var(--tarjeta);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 25px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+.card-premium:hover {
+    border-color: var(--dorado);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+.card-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.card-premium:hover .card-img {
+    transform: scale(1.1);
+}
+
+.card-info {
+    padding: 20px;
+    text-align: center;
+}
+
+.card-info h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    font-style: italic;
+    margin: 0 0 10px 0;
+    color: #fff;
+}
+
+.card-precio {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--dorado-brillante);
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+/* --- VENTANILLA MODAL PREMIUM --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 3000;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.92);
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+}
+
+.modal-contenido {
+    background: #111;
+    width: 90%;
+    max-width: 450px;
+    border-radius: 30px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--dorado-oscuro);
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+}
+
+.cerrar {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    color: white;
+    font-size: 35px;
+    cursor: pointer;
+    z-index: 10;
+    text-shadow: 0 0 10px #000;
+}
+
+#modal-img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.modal-body {
+    padding: 30px;
+    text-align: center;
+}
+
+#modal-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    margin: 0 0 15px;
+    color: var(--dorado-brillante);
+}
+
+#modal-descripcion {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    color: #ccc;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.modal-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    border-top: 1px solid #222;
+    padding-top: 25px;
+}
+
+#modal-precio {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--blanco);
+}
+
+.btn-wa {
+    background: #25d366;
+    color: white;
+    border: none;
+    padding: 15px 35px;
+    border-radius: 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100%;
+}
+
+.btn-wa:hover {
+    background: #1eb954;
+    transform: scale(1.02);
+}
+
+/* --- PIE DE PÁGINA --- */
+footer {
+    text-align: center;
+    padding: 60px 20px;
+    color: #555;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    font-family: 'Montserrat', sans-serif;
+}
