@@ -204,3 +204,92 @@ h1 {
         justify-content: center; /* Centrar solo en PC */
     }
 }
+/* --- ESTILO DE TARJETAS DE PROMO --- */
+.seccion-promos-premium {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.tarjeta-promo-dorada {
+    background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+    border: 2px solid var(--dorado-brillante);
+    border-radius: 15px;
+    padding: 25px;
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+    text-align: center;
+}
+
+.promo-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--dorado-brillante);
+    color: #000;
+    font-weight: bold;
+    font-size: 0.7rem;
+    padding: 5px 15px;
+    border-bottom-left-radius: 15px;
+    letter-spacing: 1px;
+}
+
+.promo-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--dorado-brillante);
+    font-size: 1.6rem;
+    margin-bottom: 5px;
+}
+
+.promo-descripcion {
+    color: #ccc;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.promo-precio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.precio-antes {
+    text-decoration: line-through;
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.precio-ahora {
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255,255,255,0.2);
+}
+
+/* Animación de Brillo que cruza la tarjeta */
+.promo-brillo {
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(212, 175, 55, 0.2),
+        transparent
+    );
+    transform: skewX(-25deg);
+    transition: 0.5s;
+    animation: shimmer 4s infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -150%; }
+    20% { left: 150%; }
+    100% { left: 150%; }
+}
