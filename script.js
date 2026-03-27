@@ -17,14 +17,14 @@ const menuData = [
         nombre: "Asado Meloso Real", 
         precio: "14.00", 
         categoria: "almuerzos", 
-        descripcion: "Pieza de res caramelizada en una reducción artesanal de papelón y especias, logrando una textura melosa y única.", 
+        descripcion: "Pieza de res caramelizada en una reducción artesanal de papelón y especias, logrando una textura melosa única.", 
         imagen: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=500" 
     },
     { 
-        nombre: "Pasta del Chef", 
+        nombre: "Linguine Alfredo", 
         precio: "11.50", 
         categoria: "almuerzos", 
-        descripcion: "Linguine al dente envuelto en una sedosa salsa de quesos madurados y finas hierbas del huerto.", 
+        descripcion: "Pasta al dente envuelta en una sedosa salsa de quesos madurados y finas hierbas del huerto.", 
         imagen: "https://images.unsplash.com/photo-1645112481338-316274476041?q=80&w=500" 
     },
     { 
@@ -38,7 +38,7 @@ const menuData = [
         nombre: "Cheesecake de Oro", 
         precio: "6.00", 
         categoria: "postres", 
-        descripcion: "Textura cremosa sobre una base crocante de galleta artesanal, coronada con una coulis de frutos del bosque.", 
+        descripcion: "Textura cremosa sobre una base crocante de galleta artesanal, coronada con coulis de frutos del bosque.", 
         imagen: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?q=80&w=500" 
     },
     { 
@@ -53,37 +53,27 @@ const menuData = [
 function cargarMenu() {
     const container = document.getElementById('menu-container');
     if(!container) return;
-    container.innerHTML = "";
-
-    menuData.forEach(item => {
-        const card = document.createElement('div');
-        // Importante: Mantener exactamente estas clases para que el CSS funcione
-        card.className = `card-premium ${item.categoria}`;
-        card.onclick = () => abrirModal(item);
-        
-        card.innerHTML = `
+    container.innerHTML = menuData.map(item => `
+        <div class="card-premium ${item.categoria}" onclick='abrirModal(${JSON.stringify(item)})'>
             <img src="${item.imagen}" class="card-img" alt="${item.nombre}">
             <div class="card-info">
                 <h3>${item.nombre}</h3>
                 <span class="card-precio">$${item.precio}</span>
             </div>
-        `;
-        container.appendChild(card);
-    });
+        </div>
+    `).join('');
 }
 
 function filtrar(cat, e) {
     const cards = document.querySelectorAll('.card-premium');
     cards.forEach(c => {
-        // CORRECCIÓN: Usamos 'flex' en lugar de 'block' para no romper el diseño
+        // CORRECCIÓN VITAL: 'flex' en lugar de 'block' para mantener el diseño interno
         if (cat === 'todos' || c.classList.contains(cat)) {
             c.style.display = "flex"; 
         } else {
             c.style.display = "none";
         }
     });
-
-    // Estilo de botones activos
     document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('activo'));
     if(e) e.currentTarget.classList.add('activo');
 }
@@ -93,7 +83,6 @@ function abrirModal(item) {
     document.getElementById('modal-descripcion').innerText = item.descripcion;
     document.getElementById('modal-precio').innerText = `$${item.precio}`;
     document.getElementById('modal-img').src = item.imagen;
-    
     document.getElementById('btn-wa-modal').onclick = () => {
         const msg = encodeURIComponent(`Hola Luna Café 👋\nDeseo solicitar: *${item.nombre}*`);
         window.open(`https://wa.me/584120000000?text=${msg}`, '_blank');
