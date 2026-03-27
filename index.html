@@ -3,38 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luna Café | Menú</title>
+    <title>Luna Café | Menú Premium</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@600&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
+
     <header>
-        <div class="logo-redondo"><img src="logo.png" alt="Logo"></div>
+        <div class="logo-redondo">
+            <img src="logo.png" alt="Luna Café Logo">
+        </div>
         <h1>LUNA CAFÉ</h1>
+        <div class="badge-premium">EDICIÓN EXCLUSIVA</div>
     </header>
 
     <div class="contenedor-cartel-navegacion">
         <nav class="cartel-madera-metal">
+            <div class="header-cartel">
+                <h1 class="titulo-cartel">LUNA CAFÉ</h1>
+            </div>
             <div class="scroll-wrapper">
                 <button class="filtro-btn activo" onclick="filtrar('todos', event)">TODO</button>
                 <button class="filtro-btn" onclick="filtrar('cafes', event)">CAFÉS</button>
                 <button class="filtro-btn" onclick="filtrar('desayunos', event)">AREPAS</button>
                 <button class="filtro-btn" onclick="filtrar('almuerzos', event)">ALMUERZOS</button>
                 <button class="filtro-btn" onclick="filtrar('postres', event)">POSTRES</button>
+                <button class="filtro-btn" onclick="filtrar('bebidas', event)">BEBIDAS</button>
             </div>
         </nav>
     </div>
 
     <main id="menu-container" class="grid-productos"></main>
 
-    <div id="miModal" class="modal">
+    <div id="miModal" class="modal" onclick="cerrarModalExterno(event)">
         <div class="modal-contenido">
             <span class="cerrar" onclick="cerrarModal()">&times;</span>
-            <img id="modal-img" src="">
-            <div class="modal-body" style="padding: 25px;">
-                <h2 id="modal-titulo" style="font-family:'Cormorant Garamond'; color:#f1d37e;"></h2>
-                <p id="modal-descripcion" style="color:#ccc; font-weight:300;"></p>
+            <img id="modal-img" src="" alt="Producto">
+            <div class="modal-body">
+                <h2 id="modal-titulo"></h2>
+                <p id="modal-descripcion"></p>
+                
                 <div id="modal-maridaje" class="maridaje-box"></div>
+
                 <div class="modal-footer">
                     <span id="modal-precio"></span>
                     <button id="btn-wa-modal" class="btn-wa">Pedir por WhatsApp</button>
@@ -42,6 +52,7 @@
             </div>
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
