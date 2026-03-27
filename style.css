@@ -1,6 +1,6 @@
 :root {
-    --dorado-brillante: #f1d37e;
     --dorado: #d4af37;
+    --dorado-brillante: #f1d37e;
     --oscuro: #0a0a0a;
     --tarjeta: rgba(22, 22, 22, 0.95);
 }
@@ -13,23 +13,41 @@ body {
     color: white;
     font-family: 'Poppins', sans-serif;
     margin: 0;
-    overflow-x: hidden;
 }
 
-/* LOGO CORREGIDO */
+/* LOGO CENTRADO */
+header {
+    padding: 50px 20px 30px;
+    text-align: center;
+}
+
 .logo-redondo img {
-    width: 80px; 
-    height: 80px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
     border: 2px solid var(--dorado);
     object-fit: cover;
+    margin: 0 auto 15px; /* Centrado absoluto */
+    display: block;
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
 }
 
-/* NAVEGACIÓN Y EFECTOS */
+h1 {
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 5px;
+    background: linear-gradient(to bottom, #fff, var(--dorado-brillante));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+}
+
+/* NAVEGACIÓN PREMIUM */
 .cartel-madera-metal {
     background: rgba(15, 15, 15, 0.9);
-    width: 92%; max-width: 800px; margin: 10px auto;
-    border-radius: 50px; border: 1px solid rgba(212, 175, 55, 0.2);
+    width: 92%; max-width: 800px;
+    margin: 10px auto;
+    border-radius: 50px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
 }
 
 .scroll-wrapper {
@@ -44,13 +62,11 @@ body {
     background: transparent; color: white;
     border: 1px solid rgba(255,255,255,0.1);
     padding: 10px 20px; border-radius: 50px;
-    cursor: pointer; transition: 0.3s;
+    transition: 0.3s; cursor: pointer;
 }
 
-/* EFECTOS DE BOTONES */
 .filtro-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: var(--dorado-brillante);
+    border-color: var(--dorado);
     transform: translateY(-2px);
 }
 
@@ -59,45 +75,55 @@ body {
     color: #000; font-weight: bold; border: none;
 }
 
-.btn-content .icon {
-    font-size: 1.2rem; display: block; margin-bottom: 2px;
+/* TARJETAS SIMÉTRICAS */
+#menu-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px; padding: 30px;
 }
 
-/* MODAL PEQUEÑO Y SEGURO */
+.card-premium {
+    background: var(--tarjeta);
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid #222;
+    display: flex;
+    flex-direction: column; /* Alineación vertical */
+    height: 100%; /* Todas las tarjetas igualan altura */
+}
+
+.card-img {
+    width: 100%;
+    height: 220px; /* Altura fija para todas las fotos */
+    object-fit: cover;
+}
+
+.card-info {
+    padding: 20px;
+    text-align: center;
+    flex-grow: 1; /* Empuja el precio al fondo */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* MODAL COMPACTO */
 .modal {
     display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.96); z-index: 9999; justify-content: center; align-items: center;
+    background: rgba(0,0,0,0.95); z-index: 9999; justify-content: center; align-items: center; padding: 20px;
 }
 
 .modal-contenido {
-    background: #111; max-width: 380px; width: 90%;
-    max-height: 85vh; border-radius: 15px;
-    border: 1px solid var(--dorado); display: flex; flex-direction: column;
-    position: relative; overflow: hidden;
+    background: #111; max-width: 380px; width: 100%;
+    max-height: 85vh; border-radius: 20px; border: 1px solid var(--dorado);
+    display: flex; flex-direction: column; overflow: hidden; position: relative;
 }
 
 #modal-img { width: 100%; height: 180px; object-fit: cover; }
 
-.modal-body {
-    padding: 20px; text-align: center;
-    overflow-y: auto; flex-grow: 1;
-}
-
-.maridaje-box {
-    background: rgba(212, 175, 55, 0.05); border-left: 3px solid var(--dorado);
-    padding: 10px; margin: 10px 0; font-style: italic; color: var(--dorado-brillante);
-}
+.modal-body { padding: 20px; text-align: center; overflow-y: auto; }
 
 .btn-wa {
-    background: #25d366; color: white; border: none;
-    padding: 12px; border-radius: 50px; width: 100%;
-    font-weight: bold; cursor: pointer; margin-top: 10px;
+    background: #25d366; color: white; border: none; padding: 12px;
+    border-radius: 50px; width: 100%; font-weight: bold; margin-top: 15px;
 }
-
-/* GRID PEQUEÑO */
-#menu-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 20px; padding: 25px;
-}
-.card-premium { background: var(--tarjeta); border-radius: 12px; overflow: hidden; border: 1px solid #222; }
