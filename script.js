@@ -1,7 +1,7 @@
 const menuData = [
-    { nombre: "Espresso Intenso", precio: "2.50", categoria: "cafes", descripcion: "Shot puro de grano arábico de Falcón.", imagen: "https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?q=80&w=500" },
-    { nombre: "Arepa Pelúa", precio: "6.00", categoria: "desayunos", descripcion: "Carne mechada jugosa con queso amarillo fundido.", imagen: "https://images.unsplash.com/photo-1547514701-42782101795e?q=80&w=500" },
-    { nombre: "Torta Red Velvet", precio: "5.50", categoria: "postres", descripcion: "Suave bizcocho con frosting de queso crema.", imagen: "https://images.unsplash.com/photo-1586788680434-30d324b2d46f?q=80&w=500" }
+    { nombre: "Espresso Intenso", precio: "2.50", categoria: "cafes", descripcion: "Shot puro y potente de nuestro grano arábico.", imagen: "https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?q=80&w=500" },
+    { nombre: "Arepa Pelúa", precio: "6.00", categoria: "desayunos", descripcion: "Carne mechada jugosa con queso amarillo premium.", imagen: "https://images.unsplash.com/photo-1547514701-42782101795e?q=80&w=500" },
+    { nombre: "Red Velvet", precio: "5.50", categoria: "postres", descripcion: "Suave bizcocho con auténtico frosting de queso.", imagen: "https://images.unsplash.com/photo-1586788680434-30d324b2d46f?q=80&w=500" }
 ];
 
 function cargarMenu() {
@@ -22,18 +22,13 @@ function abrirModal(item) {
     document.getElementById('modal-descripcion').innerText = item.descripcion;
     document.getElementById('modal-precio').innerText = `$${item.precio}`;
     document.getElementById('modal-img').src = item.imagen;
-    
     document.getElementById('btn-wa-modal').onclick = () => {
-        const msg = encodeURIComponent(`Hola Luna Café 👋\nDeseo ordenar: *${item.nombre}*`);
-        window.open(`https://wa.me/584120000000?text=${msg}`, '_blank');
+        window.open(`https://wa.me/584120000000?text=Hola Luna Café 👋, deseo ordenar: *${item.nombre}*`, '_blank');
     };
     document.getElementById('miModal').style.display = "flex";
 }
 
-function abrirPromo(nom, desc, pre, img) {
-    abrirModal({ nombre: nom, descripcion: desc, precio: pre, imagen: img });
-}
-
+function abrirPromo(n, d, p, i) { abrirModal({ nombre: n, descripcion: d, precio: p, imagen: i }); }
 function cerrarModal() { document.getElementById('miModal').style.display = "none"; }
 function cerrarModalExterno(e) { if(e.target.id === "miModal") cerrarModal(); }
 
