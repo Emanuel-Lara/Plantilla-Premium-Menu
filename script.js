@@ -7,24 +7,24 @@ const menuData = [
         imagen: "https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?q=80&w=500" 
     },
     { 
-        nombre: "Pabellón Luna", 
+        nombre: "Pabellón Luna Real", 
         precio: "12.00", 
         categoria: "almuerzos", 
-        descripcion: "Cortes de carne deshebrada cocinados a fuego lento en su propio jugo, acompañados de legumbres negras y arroz jazmín.", 
+        descripcion: "Cortes de carne deshebrada cocinados a fuego lento en su propio jugo, acompañados de legumbres negras en su punto y arroz jazmín.", 
         imagen: "https://images.unsplash.com/photo-1547514701-42782101795e?q=80&w=500" 
     },
     { 
-        nombre: "Asado Negro Real", 
+        nombre: "Asado Meloso Real", 
         precio: "14.00", 
         categoria: "almuerzos", 
         descripcion: "Pieza de res caramelizada en una reducción artesanal de papelón y especias, logrando una textura melosa y única.", 
         imagen: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=500" 
     },
     { 
-        nombre: "Pasta del Chef", 
+        nombre: "Linguine Alfredo", 
         precio: "11.50", 
         categoria: "almuerzos", 
-        descripcion: "Linguine al dente envuelto en una sedosa salsa de quesos madurados y finas hierbas del huerto.", 
+        descripcion: "Pasta al dente envuelta en una sedosa salsa de quesos madurados y finas hierbas del huerto.", 
         imagen: "https://images.unsplash.com/photo-1645112481338-316274476041?q=80&w=500" 
     },
     { 
@@ -42,25 +42,34 @@ const menuData = [
         imagen: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?q=80&w=500" 
     },
     { 
-        nombre: "Papelón Glacial", 
+        nombre: "Papelón Cítrico", 
         precio: "2.50", 
         categoria: "bebidas", 
-        descripcion: "Infusión fría de papelón orgánico con cítricos frescos, ideal para un maridaje refrescante.", 
+        descripcion: "Infusión fría de papelón orgánico con cítricos frescos, ideal para un maridaje refrescante con el Pabellón.", 
         imagen: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=500" 
     }
 ];
 
 function cargarMenu() {
     const container = document.getElementById('menu-container');
-    container.innerHTML = menuData.map(item => `
-        <div class="card-premium ${item.categoria}" onclick='abrirModal(${JSON.stringify(item)})'>
-            <img src="${item.imagen}" class="card-img">
+    if(!container) return;
+    container.innerHTML = "";
+
+    menuData.forEach(item => {
+        const card = document.createElement('div');
+        card.className = `card-premium ${item.categoria}`;
+        card.onclick = () => abrirModal(item);
+        
+        // CORRECCIÓN: Inyectamos foto, nombre Y precio dentro de la tarjeta
+        card.innerHTML = `
+            <img src="${item.imagen}" class="card-img" alt="${item.nombre}">
             <div class="card-info">
                 <h3>${item.nombre}</h3>
                 <span class="card-precio">$${item.precio}</span>
             </div>
-        </div>
-    `).join('');
+        `;
+        container.appendChild(card);
+    });
 }
 
 function abrirModal(item) {
@@ -68,6 +77,7 @@ function abrirModal(item) {
     document.getElementById('modal-descripcion').innerText = item.descripcion;
     document.getElementById('modal-precio').innerText = `$${item.precio}`;
     document.getElementById('modal-img').src = item.imagen;
+    
     document.getElementById('btn-wa-modal').onclick = () => {
         const msg = encodeURIComponent(`Hola Luna Café 👋\nDeseo solicitar: *${item.nombre}*`);
         window.open(`https://wa.me/584120000000?text=${msg}`, '_blank');
