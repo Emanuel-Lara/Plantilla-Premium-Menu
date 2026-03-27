@@ -1,69 +1,102 @@
 :root {
     --dorado: #d4af37;
     --dorado-brillante: #f1d37e;
-    --oscuro: #0a0a0a;
-    --tarjeta: rgba(22, 22, 22, 0.98);
+    --oscuro-glass: rgba(10, 10, 10, 0.7); /* Transparencia para ver el fondo */
+    --tarjeta-glass: rgba(22, 22, 22, 0.6);
 }
 
 body {
-    background-color: var(--oscuro);
-    background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('fondo-premium.jpg');
-    background-size: cover; background-attachment: fixed;
-    color: white; font-family: 'Poppins', sans-serif; margin: 0;
-    -webkit-tap-highlight-color: transparent;
+    background-color: #000;
+    background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('fondo-premium.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
 }
 
-/* HEADER */
+/* HEADER CENTRADO */
 header { padding: 40px 20px 20px; text-align: center; }
 .logo-redondo img {
     width: 85px; height: 85px; border-radius: 50%; border: 2px solid var(--dorado);
     margin: 0 auto 15px; display: block; object-fit: cover;
 }
-h1 { font-family: 'Playfair Display', serif; font-size: 2rem; letter-spacing: 4px; color: var(--dorado-brillante); margin: 0; }
-.badge-premium { font-size: 0.6rem; letter-spacing: 3px; color: var(--dorado); border: 1px solid var(--dorado); padding: 4px 12px; margin-top: 10px; display: inline-block; }
 
-/* PROMOCIONES */
+/* PROMOCIONES: EFECTO CRISTAL Y BRILLO */
 .seccion-promos { padding: 10px 15px; }
-.titulo-seccion { font-size: 0.7rem; letter-spacing: 3px; color: #888; text-align: center; margin-bottom: 15px; }
-.contenedor-promos { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; }
-.contenedor-promos::-webkit-scrollbar { display: none; }
+.titulo-seccion { font-size: 0.7rem; letter-spacing: 3px; color: var(--dorado-brillante); text-align: center; margin-bottom: 15px; }
 
 .promo-card {
-    flex: 0 0 85%; background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
-    border: 1px solid var(--dorado); border-radius: 15px; padding: 20px;
-    position: relative; overflow: hidden;
+    position: relative;
+    background: var(--oscuro-glass);
+    backdrop-filter: blur(10px); /* Efecto de cristal esmerilado */
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--dorado);
+    border-radius: 15px;
+    padding: 25px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
-.promo-info h3 { font-family: 'Playfair Display', serif; color: var(--dorado-brillante); margin: 0; }
-.promo-badge { position: absolute; top: 0; right: 0; background: var(--dorado); color: black; font-size: 0.6rem; font-weight: bold; padding: 5px 15px; border-radius: 0 0 0 15px; }
+
+.promo-info h3 { font-family: 'Playfair Display', serif; color: var(--dorado-brillante); margin: 0; font-size: 1.3rem; }
+.promo-info p { color: #eee; font-size: 0.9rem; margin: 5px 0; }
+.promo-precio-tag { font-weight: bold; font-size: 1.2rem; color: #fff; text-shadow: 0 0 10px rgba(212, 175, 55, 0.5); }
+
+/* ANIMACIÓN DEL BRILLO METÁLICO */
 .promo-brillo {
-    position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-    background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
-    transform: skewX(-25deg); animation: brilloPromo 4s infinite;
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: skewX(-25deg);
+    animation: brilloOro 4s infinite;
 }
-@keyframes brilloPromo { 0% { left: -100%; } 20% { left: 150%; } 100% { left: 150%; } }
 
-/* NAVEGACIÓN */
-.contenedor-navegacion { position: sticky; top: 0; z-index: 1000; background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(15px); padding: 15px 0; border-bottom: 1px solid rgba(212, 175, 55, 0.1); }
-.scroll-wrapper { display: flex; gap: 12px; padding: 0 15px; overflow-x: auto; scrollbar-width: none; }
-.filtro-btn { flex: 0 0 auto; background: #151515; color: #888; border: 1px solid #333; padding: 10px 20px; border-radius: 50px; font-size: 0.75rem; font-weight: 600; }
-.filtro-btn.activo { background: linear-gradient(135deg, #bf953f, #fcf6ba, #aa771c); color: black; border: none; }
+@keyframes brilloOro {
+    0% { left: -100%; }
+    20% { left: 150%; }
+    100% { left: 150%; }
+}
 
-/* GRID PRODUCTOS */
+/* GRID DE PRODUCTOS (TRANSPARENTES) */
 #menu-container { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 15px; }
-.card-premium { background: var(--tarjeta); border-radius: 15px; border: 1px solid #222; overflow: hidden; display: flex; flex-direction: column; height: 100%; animation: fadeIn 0.6s ease-out; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-.card-img { width: 100%; height: 140px; object-fit: cover; }
-.card-info { padding: 12px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-.card-info h3 { font-family: 'Playfair Display', serif; font-size: 0.9rem; margin: 0 0 5px; min-height: 2.4rem; display: flex; align-items: center; justify-content: center; }
-.card-precio { color: var(--dorado-brillante); font-weight: bold; font-size: 1.1rem; }
+
+.card-premium {
+    background: var(--tarjeta-glass);
+    backdrop-filter: blur(5px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.card-img { width: 100%; height: 130px; object-fit: cover; }
+
+.card-info {
+    padding: 12px;
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-info h3 { font-family: 'Playfair Display', serif; font-size: 0.9rem; min-height: 2.4rem; margin: 0; display: flex; align-items: center; justify-content: center; }
+.card-precio { color: var(--dorado-brillante); font-weight: bold; }
+
+/* NAVEGACIÓN STICKY */
+.contenedor-navegacion {
+    position: sticky; top: 0; z-index: 1000;
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(15px);
+    padding: 15px 0;
+}
 
 /* MODAL */
-.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; align-items: flex-end; }
-.modal-contenido { background: #0f0f0f; width: 100%; max-height: 85vh; border-radius: 25px 25px 0 0; border-top: 1px solid var(--dorado); animation: slideUp 0.4s ease-out; position: relative; }
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; align-items: flex-end; }
+.modal-contenido { background: #0f0f0f; width: 100%; border-radius: 25px 25px 0 0; border-top: 1px solid var(--dorado); animation: slideUp 0.4s ease; }
 @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-.indicador-cierre { width: 40px; height: 4px; background: #333; margin: 12px auto; border-radius: 10px; }
-#modal-img { width: 100%; height: 220px; object-fit: cover; }
-.modal-body { padding: 25px; text-align: center; overflow-y: auto; }
-.precio-premium { font-size: 1.6rem; margin: 15px 0; color: white; font-weight: bold; }
-.btn-wa { background: #25d366; color: white; border: none; padding: 16px; border-radius: 50px; width: 100%; font-weight: bold; }
-.btn-cerrar { background: transparent; color: #555; border: none; margin-top: 20px; font-size: 0.8rem; }
