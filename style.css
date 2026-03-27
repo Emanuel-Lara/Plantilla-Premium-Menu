@@ -1,85 +1,88 @@
 :root {
-    --oro: #d4af37; /* Oro metálico base */
-    --oro-brillante: #f1d37e; /* Oro claro */
-    --oro-cepillado: linear-gradient(135deg, #bf953f 0%, #fcf6ba 50%, #aa771c 100%);
-    --negro-fondo: #0a0a0a;
-    --glass: rgba(10, 10, 10, 0.65); /* Transparencia para ver fondo */
+    --oro: #d4af37;
+    --oro-brillante: #fcf6ba;
+    --gradiente-oro: linear-gradient(135deg, #bf953f 0%, #fcf6ba 50%, #aa771c 100%);
+    --negro-cristal: rgba(15, 15, 15, 0.85);
 }
 
 body {
-    background: var(--negro-fondo) url('fondo-premium.jpg') no-repeat center center fixed;
+    background: #000 url('fondo-premium.jpg') no-repeat center center fixed;
     background-size: cover;
-    color: white;
-    font-family: 'Poppins', sans-serif;
     margin: 0;
-    -webkit-tap-highlight-color: transparent;
+    font-family: 'Poppins', sans-serif;
 }
 
-/* HEADER */
-header { padding: 45px 20px 10px; text-align: center; }
-.logo-redondo img { width: 85px; height: 85px; border-radius: 50%; border: 2px solid var(--oro); box-shadow: 0 0 25px rgba(212, 175, 55, 0.35); }
-h1 { font-family: 'Playfair Display', serif; color: var(--oro-brillante); letter-spacing: 4px; margin: 10px 0 0; }
-.badge-premium { font-size: 0.6rem; border: 1px solid var(--oro); padding: 3px 12px; color: var(--oro); letter-spacing: 2px; display: inline-block; }
-
-/* PROMOS ESTILO VIDRIO */
-.seccion-promos { padding: 15px; }
-.promo-card {
-    position: relative; background: var(--glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--oro); border-radius: 18px; padding: 25px; overflow: hidden; text-align: center;
+/* LOGO MÁS PEQUEÑO Y ELEGANTE */
+.logo-redondo img {
+    width: 65px; /* Reducido para no dominar la pantalla */
+    height: 65px;
+    border-radius: 50%;
+    border: 1.5px solid var(--oro);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
 }
-.promo-brillo {
-    position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-    background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);
-    transform: skewX(-25deg); animation: brillo 4.5s infinite;
-}
-@keyframes brillo { 0% { left: -100%; } 20% { left: 150%; } 100% { left: 150%; } }
 
-/* --- BARRA DE NAVEGACIÓN ORO CEPILLADO (ESTILO IMAGEN) --- */
-.contenedor-cartel-navegacion { position: sticky; top: 0; z-index: 1000; padding: 12px 0; }
+/* NAVEGACIÓN ESTILO MADERA/METAL */
 .cartel-oro {
-    background: linear-gradient(145deg, #111, #000); /* Madera muy oscura */
-    margin: 0 15px; border-radius: 50px;
-    border: 2px solid;
-    border-image: var(--oro-cepillado) 1; /* Borde metálico completo */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.85); padding: 7px;
+    background: #0a0a0a;
+    margin: 0 15px;
+    border-radius: 50px;
+    padding: 5px;
+    border: 1px solid transparent;
+    background-image: linear-gradient(#0a0a0a, #0a0a0a), var(--gradiente-oro);
+    background-origin: border-box;
+    background-clip: content-box, border-box; /* Esto crea el borde dorado fino */
+    box-shadow: 0 8px 25px rgba(0,0,0,0.9);
 }
-.scroll-wrapper { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
-.scroll-wrapper::-webkit-scrollbar { display: none; }
 
-.filtro-btn {
-    flex: 0 0 auto; background: transparent; color: #888;
-    border: none; padding: 10px 22px; font-weight: 600; font-size: 0.75rem; transition: 0.3s;
-}
 .filtro-btn.activo {
-    background: var(--oro-cepillado);
-    color: black; border-radius: 50px; box-shadow: 0 0 15px var(--oro);
+    background: var(--gradiente-oro) !important;
+    color: #000 !important;
+    font-weight: 700;
+    border-radius: 50px;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
 }
 
-/* GRID Y CARDS TRANSPARENTES */
-#menu-container { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 15px; }
+/* CARD DE PROMOCIÓN CON BRILLO METÁLICO */
+.promo-card {
+    background: var(--negro-cristal);
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 20px;
+    margin: 10px 15px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* CARDS DEL MENÚ (COMO EN LA IMAGEN) */
 .card-premium {
-    background: rgba(20, 20, 20, 0.5); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-    border-radius: 18px; border: 1px solid rgba(255,255,255,0.08); overflow: hidden;
-    height: 100%; display: flex; flex-direction: column;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    transition: 0.3s;
 }
-.card-img { width: 100%; height: 140px; object-fit: cover; }
-.card-info { padding: 12px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-.card-info h3 { font-family: 'Playfair Display', serif; font-size: 0.9rem; min-height: 2.4rem; margin: 0 0 5px; line-height: 1.2; }
-.card-precio { color: var(--oro-brillante); font-weight: bold; font-size: 1.1rem; }
 
-/* MODAL PREMIUM SIN VOLVER */
-.modal { display: none; position: fixed; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 2000; align-items: flex-end; }
-.modal-contenido { background: #0a0a0a; width: 100%; border-radius: 35px 35px 0 0; border-top: 2px solid var(--oro); animation: slide 0.4s ease; padding-bottom: 40px; }
-@keyframes slide { from { transform: translateY(100%); } to { transform: translateY(0); } }
-.modal-body { padding: 30px; text-align: center; }
-.precio-modal-premium { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: white; margin-bottom: 25px; }
+.card-info h3 {
+    font-family: 'Playfair Display', serif;
+    color: #fff;
+    letter-spacing: 1px;
+}
 
-/* BOTÓN WHATSAPP METALIZADO (ESTILO IMAGEN) */
+.card-precio {
+    color: var(--oro-brillante);
+    font-size: 1.2rem;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+/* BOTÓN WHATSAPP DEL MODAL */
 .btn-whatsapp-metalizado {
-    background: linear-gradient(135deg, #25d366, #128c7e);
-    color: white; border: none; width: 100%; padding: 18px;
-    border-radius: 50px; font-weight: bold; font-size: 1rem;
-    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.35);
-    display: flex; align-items: center; justify-content: center; gap: 12px;
+    background: var(--gradiente-oro) !important; /* Ahora es dorado como en la imagen */
+    color: #000 !important;
+    border-radius: 50px;
+    padding: 15px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
-.btn-whatsapp-metalizado:active { transform: scale(0.96); transition: 0.1s; }
