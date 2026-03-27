@@ -20,11 +20,13 @@ h1 { font-family: 'Cormorant Garamond', serif; letter-spacing: 5px; background: 
 
 /* NAVEGACIÓN ESTILO JOYERÍA */
 .contenedor-cartel-navegacion { position: sticky; top: 0; z-index: 2000; width: 100%; }
-.cartel-madera-metal { 
-    background: rgba(15, 15, 15, 0.85) !important; 
-    backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-    width: 90%; max-width: 800px; margin: 10px auto; 
-    border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 50px; 
+.cartel-madera-metal {
+    display: flex;
+    flex-direction: column;
+    width: 92%; /* Ajustado para que no pegue a los bordes */
+    max-width: 800px;
+    margin: 10px auto;
+    overflow: visible; /* IMPORTANTE: para que no corte los botones */
 }
 .logo-redondo img {
     width: 80px;  /* Antes era 120px */
@@ -42,13 +44,21 @@ h1 { font-family: 'Cormorant Garamond', serif; letter-spacing: 5px; background: 
     transform: scale(1.1);
 }
 
-.scroll-wrapper { display: flex; gap: 10px; padding: 10px 20px; overflow-x: auto; scrollbar-width: none; }
+.scroll-wrapper {
+    display: flex !important; /* Forzamos el despliegue */
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 10px 15px;
+    overflow-x: auto; /* Permite el deslizamiento lateral */
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch; /* Suavidad en iPhone */
+}
 .scroll-wrapper::-webkit-scrollbar { display: none; }
 
 .filtro-btn {
-    background: transparent; color: white; border: 1px solid rgba(255,255,255,0.1);
-    padding: 8px 18px; border-radius: 50px; font-size: 0.7rem; cursor: pointer;
-    transition: 0.3s; flex-shrink: 0; font-family: 'Montserrat', sans-serif; letter-spacing: 1px;
+    flex: 0 0 auto; /* Evita que los botones se achiquen para caber */
+    min-width: fit-content;
+    display: inline-block;
 }
 
 .filtro-btn.activo {
