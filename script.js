@@ -101,6 +101,23 @@ function filtrar(cat, e) {
             c.style.display = c.classList.contains(cat) ? 'block' : 'none';
         }
     });
+    function filtrar(cat, e) {
+    const cards = document.querySelectorAll('.card-premium');
+    cards.forEach(c => {
+        if (cat === 'todos') {
+            c.style.display = 'block';
+        } else {
+            c.style.display = c.classList.contains(cat) ? 'block' : 'none';
+        }
+    });
+
+    document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('activo'));
+    if(e) {
+        e.currentTarget.classList.add('activo');
+        // Esto centra el botón automáticamente al tocarlo en móviles
+        e.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+}
 
     // Cambiar estado visual del botón
     document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('activo'));
