@@ -59,7 +59,44 @@ h1 { font-family: 'Cormorant Garamond', serif; letter-spacing: 5px; background: 
     display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
     background: rgba(0,0,0,0.95); z-index: 9999 !important; justify-content: center; align-items: center; 
 }
-.modal-contenido { background: #111; max-width: 450px; width: 90%; border-radius: 15px; border: 1px solid var(--dorado-oscuro); overflow: hidden; position: relative; }
+.modal-contenido {
+    background: #111;
+    max-width: 450px;
+    width: 90%;
+    max-height: 85vh; /* Esto evita que el modal se salga de la pantalla */
+    border-radius: 15px;
+    border: 1px solid var(--dorado-oscuro);
+    position: relative;
+    display: flex;
+    flex-direction: column; /* Organiza la imagen y el texto en columna */
+    overflow: hidden; /* Evita que el contenido se desborde */
+}
+
+.modal-body {
+    padding: 20px;
+    text-align: center;
+    overflow-y: auto; /* Habilita el scroll solo en el texto y el botón */
+    flex-grow: 1; /* Ocupa el espacio disponible */
+}
+
+.modal-footer {
+    padding: 15px 0;
+    margin-top: 10px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.btn-wa {
+    padding: 12px;
+    font-size: 0.9rem;
+    /* Aseguramos que el botón no sea más alto de lo necesario */
+}
+
+#modal-img {
+    width: 100%;
+    height: 200px; /* Reducimos un poco la altura en móvil para ganar espacio */
+    object-fit: cover;
+    flex-shrink: 0; /* Evita que la imagen se aplaste */
+}
 
 .maridaje-box {
     background: rgba(212, 175, 55, 0.08);
