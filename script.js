@@ -5,7 +5,7 @@ const menuData = [
         categoria: "cafes",
         descripcion: "Un shot puro y potente de nuestro grano arábico de Falcón.",
         maridaje: "Perfecto con un bombón de chocolate oscuro.",
-        imagen: "https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?q=65&w=500"
+        imagen: "https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?q=80&w=500"
     },
     {
         nombre: "Arepa Pelúa Premium",
@@ -13,15 +13,7 @@ const menuData = [
         categoria: "desayunos",
         descripcion: "Carne mechada jugosa con queso amarillo fundido de primera.",
         maridaje: "Ideal con un café negro bien caliente.",
-        imagen: "https://images.unsplash.com/photo-1547514701-42782101795e?q=65&w=500"
-    },
-    {
-        nombre: "Hamburguesa Luna",
-        precio: "10.00",
-        categoria: "almuerzos",
-        descripcion: "Carne Angus de 200g, cebolla caramelizada y pan artesanal.",
-        maridaje: "Combina excelente con una cerveza fría.",
-        imagen: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=65&w=500"
+        imagen: "https://images.unsplash.com/photo-1547514701-42782101795e?q=80&w=500"
     }
 ];
 
@@ -36,9 +28,9 @@ function cargarMenu() {
         card.onclick = () => abrirModal(item);
         card.innerHTML = `
             <img src="${item.imagen}" class="card-img" alt="${item.nombre}">
-            <div class="card-info" style="padding:15px; text-align:center;">
+            <div class="card-info">
                 <h3>${item.nombre}</h3>
-                <span style="color:#f1d37e; font-weight:bold;">$${item.precio}</span>
+                <span class="card-precio" style="color:#f1d37e; font-weight:bold;">$${item.precio}</span>
             </div>
         `;
         container.appendChild(card);
@@ -48,7 +40,10 @@ function cargarMenu() {
 function abrirModal(item) {
     document.getElementById('modal-titulo').innerText = item.nombre;
     document.getElementById('modal-descripcion').innerText = item.descripcion;
-    document.getElementById('modal-maridaje').innerHTML = `<strong>Sugerencia:</strong> ${item.maridaje}`;
+    const maridajeContainer = document.getElementById('modal-maridaje');
+    if(maridajeContainer) {
+        maridajeContainer.innerHTML = item.maridaje ? `<strong>Sugerencia:</strong> ${item.maridaje}` : "";
+    }
     document.getElementById('modal-precio').innerText = `$${item.precio}`;
     document.getElementById('modal-img').src = item.imagen;
 
