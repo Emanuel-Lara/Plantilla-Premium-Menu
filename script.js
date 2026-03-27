@@ -21,10 +21,10 @@ const menuData = [
         imagen: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=500" 
     },
     { 
-        nombre: "Linguine Alfredo", 
+        nombre: "Pasta del Chef", 
         precio: "11.50", 
         categoria: "almuerzos", 
-        descripcion: "Pasta al dente envuelta en una sedosa salsa de quesos madurados y finas hierbas del huerto.", 
+        descripcion: "Linguine al dente envuelto en una sedosa salsa de quesos madurados y finas hierbas del huerto.", 
         imagen: "https://images.unsplash.com/photo-1645112481338-316274476041?q=80&w=500" 
     },
     { 
@@ -45,7 +45,7 @@ const menuData = [
         nombre: "Papelón Cítrico", 
         precio: "2.50", 
         categoria: "bebidas", 
-        descripcion: "Infusión fría de papelón orgánico con cítricos frescos, ideal para un maridaje refrescante con el Pabellón.", 
+        descripcion: "Infusión fría de papelón orgánico con cítricos frescos, ideal para un maridaje refrescante.", 
         imagen: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=500" 
     }
 ];
@@ -57,10 +57,10 @@ function cargarMenu() {
 
     menuData.forEach(item => {
         const card = document.createElement('div');
+        // Importante: Mantener exactamente estas clases para que el CSS funcione
         card.className = `card-premium ${item.categoria}`;
         card.onclick = () => abrirModal(item);
         
-        // CORRECCIÓN: Inyectamos foto, nombre Y precio dentro de la tarjeta
         card.innerHTML = `
             <img src="${item.imagen}" class="card-img" alt="${item.nombre}">
             <div class="card-info">
@@ -70,6 +70,22 @@ function cargarMenu() {
         `;
         container.appendChild(card);
     });
+}
+
+function filtrar(cat, e) {
+    const cards = document.querySelectorAll('.card-premium');
+    cards.forEach(c => {
+        // CORRECCIÓN: Usamos 'flex' en lugar de 'block' para no romper el diseño
+        if (cat === 'todos' || c.classList.contains(cat)) {
+            c.style.display = "flex"; 
+        } else {
+            c.style.display = "none";
+        }
+    });
+
+    // Estilo de botones activos
+    document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('activo'));
+    if(e) e.currentTarget.classList.add('activo');
 }
 
 function abrirModal(item) {
@@ -88,13 +104,5 @@ function abrirModal(item) {
 function abrirPromo(n, d, p, i) { abrirModal({ nombre: n, descripcion: d, precio: p, imagen: i }); }
 function cerrarModal() { document.getElementById('miModal').style.display = "none"; }
 function cerrarModalExterno(e) { if(e.target.id === "miModal") cerrarModal(); }
-
-function filtrar(cat, e) {
-    document.querySelectorAll('.card-premium').forEach(c => {
-        c.style.display = (cat === 'todos' || c.classList.contains(cat)) ? 'flex' : 'none';
-    });
-    document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('activo'));
-    e.currentTarget.classList.add('activo');
-}
 
 window.onload = cargarMenu;
