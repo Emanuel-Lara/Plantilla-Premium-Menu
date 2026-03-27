@@ -3,21 +3,21 @@ const menuData = [
         nombre: "Espresso Terciopelo", 
         precio: "2.50", 
         categoria: "cafes", 
-        descripcion: "Una extracción pura de granos arábicos seleccionados, con notas de chocolate oscuro y una crema densa color avellana.", 
+        descripcion: "Una extracción pura de granos arábicos seleccionados, con notas de chocolate oscuro.", 
         imagen: "https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?q=80&w=500" 
     },
     { 
         nombre: "Pabellón Luna Real", 
         precio: "12.00", 
         categoria: "almuerzos", 
-        descripcion: "Cortes de carne deshebrada cocinados a fuego lento en su propio jugo, acompañados de legumbres negras y arroz jazmín.", 
+        descripcion: "Carne deshebrada, legumbres negras y arroz jazmín en perfecta armonía.", 
         imagen: "https://images.unsplash.com/photo-1547514701-42782101795e?q=80&w=500" 
     },
     { 
-        nombre: "Red Velvet Infinito", 
+        nombre: "Torta Red Velvet", 
         precio: "5.50", 
         categoria: "postres", 
-        descripcion: "Bizcocho aterciopelado de cacao fino, entrelazado con capas de suave crema de queso y un toque de vainilla Bourbon.", 
+        descripcion: "Bizcocho aterciopelado con suave crema de queso.", 
         imagen: "https://images.unsplash.com/photo-1586788680434-30d324b2d46f?q=80&w=500" 
     }
 ];
@@ -25,7 +25,6 @@ const menuData = [
 function cargarMenu() {
     const container = document.getElementById('menu-container');
     if(!container) return;
-    
     container.innerHTML = menuData.map(item => `
         <div class="card-premium ${item.categoria}" onclick='abrirModal(${JSON.stringify(item)})'>
             <img src="${item.imagen}" class="card-img">
@@ -37,34 +36,27 @@ function cargarMenu() {
     `).join('');
 }
 
-
 function abrirModal(item) {
     document.getElementById('modal-titulo').innerText = item.nombre;
     document.getElementById('modal-descripcion').innerText = item.descripcion;
     document.getElementById('modal-precio').innerText = `$${item.precio}`;
     document.getElementById('modal-img').src = item.imagen;
-    
     document.getElementById('btn-wa-modal').onclick = () => {
-        const msg = encodeURIComponent(`Hola Luna Café 👋\nDeseo solicitar: *${item.nombre}*`);
-        window.open(`https://wa.me/584120000000?text=${msg}`, '_blank');
+        window.open(`https://wa.me/584120000000?text=Hola, deseo: ${item.nombre}`, '_blank');
     };
     document.getElementById('miModal').style.display = "flex";
+}
+
+function filtrar(cat, e) {
+    document.querySelectorAll('.card-premium').forEach(c => {
+        c.style.display = (cat === 'todos' || c.classList.contains(cat)) ? 'flex' : 'none';
+    });
+    document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('activo'));
+    if(e) e.currentTarget.classList.add('activo');
 }
 
 function abrirPromo(n, d, p, i) { abrirModal({ nombre: n, descripcion: d, precio: p, imagen: i }); }
 function cerrarModal() { document.getElementById('miModal').style.display = "none"; }
 function cerrarModalExterno(e) { if(e.target.id === "miModal") cerrarModal(); }
-
-function filtrar(cat, e) {
-    document.querySelectorAll('.card-premium').forEach(c => {
-        if (cat === 'todos' || c.classList.contains(cat)) {
-            c.style.display = "flex"; 
-        } else {
-            c.style.display = "none";
-        }
-    });
-    document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('activo'));
-    if(e) e.currentTarget.classList.add('activo');
-}
 
 window.onload = cargarMenu;
