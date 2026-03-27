@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Luna Café | Menú Premium</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -11,48 +11,58 @@
 
     <header>
         <div class="logo-redondo">
-            <img src="logo.png" alt="Luna Café Logo">
+            <img src="logo.png" alt="Logo Luna Café">
         </div>
         <h1>LUNA CAFÉ</h1>
         <div class="badge-premium">EDICIÓN EXCLUSIVA</div>
     </header>
 
-    <div class="contenedor-cartel-navegacion">
-        <nav class="cartel-madera-metal">
-            <div class="scroll-wrapper">
-                <button class="filtro-btn activo" onclick="filtrar('todos', event)">
-                    <div class="btn-content"><span class="icon">✨</span><span>TODOS</span></div>
-                </button>
-                <button class="filtro-btn" onclick="filtrar('cafes', event)">
-                    <div class="btn-content"><span class="icon">☕</span><span>CAFÉS</span></div>
-                </button>
-                <button class="filtro-btn" onclick="filtrar('desayunos', event)">
-                    <div class="btn-content"><span class="icon">🥪</span><span>AREPAS</span></div>
-                </button>
-                <button class="filtro-btn" onclick="filtrar('almuerzos', event)">
-                    <div class="btn-content"><span class="icon">🍔</span><span>ALMUERZOS</span></div>
-                </button>
-                <button class="filtro-btn" onclick="filtrar('postres', event)">
-                    <div class="btn-content"><span class="icon">🍰</span><span>POSTRES</span></div>
-                </button>
+    <section class="seccion-promos">
+        <h2 class="titulo-seccion">OFERTAS DE HOY</h2>
+        <div class="contenedor-promos">
+            <div class="promo-card" onclick="abrirPromo('Promo Tarde de Café', '2 Capuccinos + 2 Porciones de Torta', '10.00', 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=500')">
+                <div class="promo-badge">2x1</div>
+                <div class="promo-info">
+                    <h3>TARDE DE CAFÉ</h3>
+                    <p>2 Capuccinos + 2 Tortas</p>
+                    <div class="promo-precio-tag">POR $10.00</div>
+                </div>
+                <div class="promo-brillo"></div>
             </div>
+
+            <div class="promo-card" onclick="abrirPromo('Combo Mañanero', 'Arepa Pelúa + Café Negro Grande', '7.00', 'https://images.unsplash.com/photo-1547514701-42782101795e?q=80&w=500')">
+                <div class="promo-badge">POPULAR</div>
+                <div class="promo-info">
+                    <h3>COMBO MAÑANERO</h3>
+                    <p>Arepa + Café Grande</p>
+                    <div class="promo-precio-tag">POR $7.00</div>
+                </div>
+                <div class="promo-brillo"></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="contenedor-navegacion">
+        <nav class="scroll-wrapper">
+            <button class="filtro-btn activo" onclick="filtrar('todos', event)">✨ TODOS</button>
+            <button class="filtro-btn" onclick="filtrar('cafes', event)">☕ CAFÉS</button>
+            <button class="filtro-btn" onclick="filtrar('desayunos', event)">🥪 AREPAS</button>
+            <button class="filtro-btn" onclick="filtrar('postres', event)">🍰 POSTRES</button>
         </nav>
     </div>
 
     <main id="menu-container"></main>
 
-    <div id="miModal" class="modal">
+    <div id="miModal" class="modal" onclick="cerrarModalExterno(event)">
         <div class="modal-contenido">
-            <span class="cerrar" onclick="cerrarModal()">&times;</span>
-            <img id="modal-img" src="" alt="Producto">
+            <div class="indicador-cierre"></div>
+            <img id="modal-img" src="">
             <div class="modal-body">
                 <h2 id="modal-titulo"></h2>
                 <p id="modal-descripcion"></p>
-                <div id="modal-maridaje" class="maridaje-box"></div>
-                <div class="modal-footer">
-                    <span id="modal-precio"></span>
-                    <button id="btn-wa-modal" class="btn-wa">Pedir por WhatsApp</button>
-                </div>
+                <div id="modal-precio" class="precio-premium"></div>
+                <button id="btn-wa-modal" class="btn-wa">🛒 PEDIR POR WHATSAPP</button>
+                <button class="btn-cerrar" onclick="cerrarModal()">VOLVER AL MENÚ</button>
             </div>
         </div>
     </div>
