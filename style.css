@@ -1,11 +1,13 @@
 :root {
-    --dorado: #d4af37;
-    --dorado-brillante: #f1d37e;
-    --glass: rgba(10, 10, 10, 0.6);
+    --oro: #d4af37; /* Oro metálico base */
+    --oro-brillante: #f1d37e; /* Oro claro */
+    --oro-cepillado: linear-gradient(135deg, #bf953f 0%, #fcf6ba 50%, #aa771c 100%);
+    --negro-fondo: #0a0a0a;
+    --glass: rgba(10, 10, 10, 0.65); /* Transparencia para ver fondo */
 }
 
 body {
-    background: #000 url('fondo-premium.jpg') no-repeat center center fixed;
+    background: var(--negro-fondo) url('fondo-premium.jpg') no-repeat center center fixed;
     background-size: cover;
     color: white;
     font-family: 'Poppins', sans-serif;
@@ -15,67 +17,69 @@ body {
 
 /* HEADER */
 header { padding: 45px 20px 10px; text-align: center; }
-.logo-redondo img { width: 85px; height: 85px; border-radius: 50%; border: 2px solid var(--dorado); box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
-h1 { font-family: 'Playfair Display', serif; color: var(--dorado-brillante); letter-spacing: 4px; margin: 10px 0 0; }
+.logo-redondo img { width: 85px; height: 85px; border-radius: 50%; border: 2px solid var(--oro); box-shadow: 0 0 25px rgba(212, 175, 55, 0.35); }
+h1 { font-family: 'Playfair Display', serif; color: var(--oro-brillante); letter-spacing: 4px; margin: 10px 0 0; }
+.badge-premium { font-size: 0.6rem; border: 1px solid var(--oro); padding: 3px 12px; color: var(--oro); letter-spacing: 2px; display: inline-block; }
 
-/* NAV MADERA Y METAL */
-.contenedor-cartel { position: sticky; top: 0; z-index: 1000; padding: 12px 0; }
-.cartel-madera-metal {
-    background: linear-gradient(145deg, #1a1a1a, #050505);
-    margin: 0 15px; border-radius: 50px; border: 1px solid rgba(212, 175, 55, 0.4);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.8); padding: 6px;
+/* PROMOS ESTILO VIDRIO */
+.seccion-promos { padding: 15px; }
+.promo-card {
+    position: relative; background: var(--glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--oro); border-radius: 18px; padding: 25px; overflow: hidden; text-align: center;
+}
+.promo-brillo {
+    position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);
+    transform: skewX(-25deg); animation: brillo 4.5s infinite;
+}
+@keyframes brillo { 0% { left: -100%; } 20% { left: 150%; } 100% { left: 150%; } }
+
+/* --- BARRA DE NAVEGACIÓN ORO CEPILLADO (ESTILO IMAGEN) --- */
+.contenedor-cartel-navegacion { position: sticky; top: 0; z-index: 1000; padding: 12px 0; }
+.cartel-oro {
+    background: linear-gradient(145deg, #111, #000); /* Madera muy oscura */
+    margin: 0 15px; border-radius: 50px;
+    border: 2px solid;
+    border-image: var(--oro-cepillado) 1; /* Borde metálico completo */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.85); padding: 7px;
 }
 .scroll-wrapper { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
 .scroll-wrapper::-webkit-scrollbar { display: none; }
-.filtro-btn { flex: 0 0 auto; background: transparent; color: #888; border: none; padding: 10px 22px; font-weight: 600; font-size: 0.75rem; transition: 0.3s; }
+
+.filtro-btn {
+    flex: 0 0 auto; background: transparent; color: #888;
+    border: none; padding: 10px 22px; font-weight: 600; font-size: 0.75rem; transition: 0.3s;
+}
 .filtro-btn.activo {
-    background: linear-gradient(135deg, #bf953f, #fcf6ba, #aa771c);
-    color: black; border-radius: 50px; box-shadow: 0 0 15px var(--dorado);
+    background: var(--oro-cepillado);
+    color: black; border-radius: 50px; box-shadow: 0 0 15px var(--oro);
 }
 
-/* GRID DE PRODUCTOS */
+/* GRID Y CARDS TRANSPARENTES */
 #menu-container { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 15px; }
-
 .card-premium {
-    background: rgba(20, 20, 20, 0.55);
-    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-    border-radius: 18px; border: 1px solid rgba(255,255,255,0.05);
-    overflow: hidden; display: flex; flex-direction: column; height: 100%;
+    background: rgba(20, 20, 20, 0.5); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    border-radius: 18px; border: 1px solid rgba(255,255,255,0.08); overflow: hidden;
+    height: 100%; display: flex; flex-direction: column;
 }
-
 .card-img { width: 100%; height: 140px; object-fit: cover; }
+.card-info { padding: 12px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+.card-info h3 { font-family: 'Playfair Display', serif; font-size: 0.9rem; min-height: 2.4rem; margin: 0 0 5px; line-height: 1.2; }
+.card-precio { color: var(--oro-brillante); font-weight: bold; font-size: 1.1rem; }
 
-.card-info {
-    padding: 12px; text-align: center; flex-grow: 1;
-    display: flex; flex-direction: column; justify-content: space-between;
-}
-
-.card-info h3 {
-    font-family: 'Playfair Display', serif; font-size: 0.9rem;
-    min-height: 2.4rem; margin: 0 0 5px; line-height: 1.2;
-}
-
-.card-precio { color: var(--dorado-brillante); font-weight: bold; font-size: 1.1rem; }
-
-/* MODAL Y DESCRIPCIÓN PREMIUM */
+/* MODAL PREMIUM SIN VOLVER */
 .modal { display: none; position: fixed; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 2000; align-items: flex-end; }
-.modal-contenido { background: #0a0a0a; width: 100%; border-radius: 35px 35px 0 0; border-top: 2px solid var(--dorado); padding-bottom: 40px; }
-.indicador-cierre { width: 45px; height: 5px; background: #333; margin: 15px auto; border-radius: 10px; }
-#modal-img { width: 100%; height: 240px; object-fit: cover; }
+.modal-contenido { background: #0a0a0a; width: 100%; border-radius: 35px 35px 0 0; border-top: 2px solid var(--oro); animation: slide 0.4s ease; padding-bottom: 40px; }
+@keyframes slide { from { transform: translateY(100%); } to { transform: translateY(0); } }
 .modal-body { padding: 30px; text-align: center; }
+.precio-modal-premium { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: white; margin-bottom: 25px; }
 
-#modal-descripcion {
-    font-family: 'Poppins', sans-serif; color: #bbb; line-height: 1.8;
-    margin: 15px 0 25px; font-size: 0.95rem; position: relative; padding-top: 15px;
-}
-#modal-descripcion::before { content: "✧"; position: absolute; top: -5px; left: 50%; transform: translateX(-50%); color: var(--dorado); font-size: 1.2rem; }
-
-.precio-modal { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: white; margin-bottom: 25px; }
-
-.btn-wa-premium {
+/* BOTÓN WHATSAPP METALIZADO (ESTILO IMAGEN) */
+.btn-whatsapp-metalizado {
     background: linear-gradient(135deg, #25d366, #128c7e);
     color: white; border: none; width: 100%; padding: 18px;
     border-radius: 50px; font-weight: bold; font-size: 1rem;
     box-shadow: 0 8px 25px rgba(37, 211, 102, 0.35);
     display: flex; align-items: center; justify-content: center; gap: 12px;
 }
+.btn-whatsapp-metalizado:active { transform: scale(0.96); transition: 0.1s; }
