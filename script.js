@@ -1,72 +1,48 @@
 const menuData = [
-    {
-        nombre: "Espresso Intenso",
-        precio: "2.50",
-        categoria: "cafes",
-        descripcion: "Un shot puro y potente de nuestro grano arábico de Falcón.",
-        maridaje: "Perfecto con un bombón de chocolate oscuro.",
-        imagen: "https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?q=80&w=500"
-    },
-    {
-        nombre: "Arepa Pelúa Premium",
-        precio: "6.00",
-        categoria: "desayunos",
-        descripcion: "Carne mechada jugosa con queso amarillo fundido de primera.",
-        maridaje: "Ideal con un café negro bien caliente.",
-        imagen: "https://images.unsplash.com/photo-1547514701-42782101795e?q=80&w=500"
-    }
+    { nombre: "Espresso Intenso", precio: "2.50", categoria: "cafes", descripcion: "Shot puro de grano arábico de Falcón.", imagen: "https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?q=80&w=500" },
+    { nombre: "Arepa Pelúa", precio: "6.00", categoria: "desayunos", descripcion: "Carne mechada jugosa con queso amarillo fundido.", imagen: "https://images.unsplash.com/photo-1547514701-42782101795e?q=80&w=500" },
+    { nombre: "Red Velvet", precio: "5.50", categoria: "postres", descripcion: "Suave bizcocho con frosting de queso crema.", imagen: "https://images.unsplash.com/photo-1586788680434-30d324b2d46f?q=80&w=500" }
 ];
 
 function cargarMenu() {
     const container = document.getElementById('menu-container');
-    if(!container) return;
-    container.innerHTML = "";
-
-    menuData.forEach(item => {
-        const card = document.createElement('div');
-        card.className = `card-premium ${item.categoria}`;
-        card.onclick = () => abrirModal(item);
-        card.innerHTML = `
-            <img src="${item.imagen}" class="card-img" alt="${item.nombre}">
+    container.innerHTML = menuData.map(item => `
+        <div class="card-premium ${item.categoria}" onclick='abrirModal(${JSON.stringify(item)})'>
+            <img src="${item.imagen}" class="card-img">
             <div class="card-info">
                 <h3>${item.nombre}</h3>
-                <span class="card-precio" style="color:#f1d37e; font-weight:bold;">$${item.precio}</span>
+                <span class="card-precio">$${item.precio}</span>
             </div>
-        `;
-        container.appendChild(card);
-    });
+        </div>
+    `).join('');
 }
 
 function abrirModal(item) {
     document.getElementById('modal-titulo').innerText = item.nombre;
     document.getElementById('modal-descripcion').innerText = item.descripcion;
-    const maridajeContainer = document.getElementById('modal-maridaje');
-    if(maridajeContainer) {
-        maridajeContainer.innerHTML = item.maridaje ? `<strong>Sugerencia:</strong> ${item.maridaje}` : "";
-    }
     document.getElementById('modal-precio').innerText = `$${item.precio}`;
     document.getElementById('modal-img').src = item.imagen;
-
+    
     document.getElementById('btn-wa-modal').onclick = () => {
-        const tel = "584120000000";
-        const msg = encodeURIComponent(`Hola Luna Café 👋\nDeseo pedir: *${item.nombre}*`);
-        window.open(`https://wa.me/${tel}?text=${msg}`, '_blank');
+        const msg = encodeURIComponent(`Hola Luna Café 👋\nDeseo ordenar: *${item.nombre}*`);
+        window.open(`https://wa.me/584120000000?text=${msg}`, '_blank');
     };
-
     document.getElementById('miModal').style.display = "flex";
 }
 
-function cerrarModal() { document.getElementById('miModal').style.display = "none"; }
-
-function filtrar(cat, e) {
-    const cards = document.querySelectorAll('.card-premium');
-    cards.forEach(c => {
-        c.style.display = (cat === 'todos' || c.classList.contains(cat)) ? 'block' : 'none';
-    });
-    
-    document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('activo'));
-    if(e) e.currentTarget.classList.add('activo');
+function abrirPromo(nom, desc, pre, img) {
+    abrirModal({ nombre: nom, descripcion: desc, precio: pre, imagen: img });
 }
 
-window.onclick = (e) => { if (e.target.id === "miModal") cerrarModal(); };
+function cerrarModal() { document.getElementById('miModal').style.display = "none"; }
+function cerrarModalExterno(e) { if(e.target.id === "miModal") cerrarModal(); }
+
+function filtrar(cat, e) {
+    document.querySelectorAll('.card-premium').forEach(c => {
+        c.style.display = (cat === 'todos' || c.classList.contains(cat)) ? 'flex' : 'none';
+    });
+    document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('activo'));
+    e.currentTarget.classList.add('activo');
+}
+
 window.onload = cargarMenu;
