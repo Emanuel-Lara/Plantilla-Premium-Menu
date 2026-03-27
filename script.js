@@ -25,16 +25,18 @@ const menuData = [
 function cargarMenu() {
     const container = document.getElementById('menu-container');
     if(!container) return;
+    
     container.innerHTML = menuData.map(item => `
-        <div class="card-premium ${item.categoria}">
-            <img src="${item.imagen}" class="card-img" onclick='abrirModal(${JSON.stringify(item)})'>
-            <div class="card-info" onclick='abrirModal(${JSON.stringify(item)})'>
+        <div class="card-premium ${item.categoria}" onclick='abrirModal(${JSON.stringify(item)})'>
+            <img src="${item.imagen}" class="card-img">
+            <div class="card-info">
                 <h3>${item.nombre}</h3>
                 <span class="card-precio">$${item.precio}</span>
             </div>
         </div>
     `).join('');
 }
+
 
 function abrirModal(item) {
     document.getElementById('modal-titulo').innerText = item.nombre;
