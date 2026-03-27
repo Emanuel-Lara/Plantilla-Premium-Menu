@@ -10,44 +10,33 @@
 <body>
 
     <header>
-        <div class="header-content">
-            <div class="logo-redondo">
-                <img src="logo.png" alt="Luna Café Logo">
-            </div>
-            <h1>LUNA CAFÉ</h1>
-            <div class="badge-premium">EDICIÓN EXCLUSIVA</div>
+        <div class="logo-redondo">
+            <img src="logo.png" alt="Luna Café Logo">
         </div>
+        <h1>LUNA CAFÉ</h1>
+        <div class="badge-premium">EDICIÓN EXCLUSIVA</div>
     </header>
 
     <div class="contenedor-cartel-navegacion">
-        <div class="cartel-madera-metal">
-            <div class="header-cartel">
-                <h1 class="titulo-cartel">LUNA CAFÉ</h1>
+        <nav class="cartel-madera-metal">
+            <div class="scroll-wrapper">
+                <button class="filtro-btn activo" onclick="filtrar('todos', event)">
+                    <div class="btn-content"><span class="icon">✨</span><span>TODOS</span></div>
+                </button>
+                <button class="filtro-btn" onclick="filtrar('cafes', event)">
+                    <div class="btn-content"><span class="icon">☕</span><span>CAFÉS</span></div>
+                </button>
+                <button class="filtro-btn" onclick="filtrar('desayunos', event)">
+                    <div class="btn-content"><span class="icon">🥪</span><span>AREPAS</span></div>
+                </button>
+                <button class="filtro-btn" onclick="filtrar('almuerzos', event)">
+                    <div class="btn-content"><span class="icon">🍔</span><span>ALMUERZOS</span></div>
+                </button>
+                <button class="filtro-btn" onclick="filtrar('postres', event)">
+                    <div class="btn-content"><span class="icon">🍰</span><span>POSTRES</span></div>
+                </button>
             </div>
-            <div class="separador-cartel"></div>
-            <nav class="barra-filtros-premium">
-                <div class="scroll-wrapper">
-                    <button class="filtro-btn activo" onclick="filtrar('todos', event)">
-                        <div class="btn-content"><span class="icon">✨</span><span>TODOS</span></div>
-                    </button>
-                    <button class="filtro-btn" onclick="filtrar('cafes', event)">
-                        <div class="btn-content"><span class="icon">☕</span><span>CAFÉS</span></div>
-                    </button>
-                    <button class="filtro-btn" onclick="filtrar('desayunos', event)">
-                        <div class="btn-content"><span class="icon">🥪</span><span>DESAYUNOS</span></div>
-                    </button>
-                    <button class="filtro-btn" onclick="filtrar('almuerzos', event)">
-                        <div class="btn-content"><span class="icon">🍔</span><span>ALMUERZOS</span></div>
-                    </button>
-                    <button class="filtro-btn" onclick="filtrar('postres', event)">
-                        <div class="btn-content"><span class="icon">🍰</span><span>POSTRES</span></div>
-                    </button>
-                    <button class="filtro-btn" onclick="filtrar('bebidas', event)">
-                        <div class="btn-content"><span class="icon">🍹</span><span>BEBIDAS</span></div>
-                    </button>
-                </div>
-            </nav>
-        </div>
+        </nav>
     </div>
 
     <main id="menu-container"></main>
