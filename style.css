@@ -26,6 +26,21 @@ h1 { font-family: 'Cormorant Garamond', serif; letter-spacing: 5px; background: 
     width: 90%; max-width: 800px; margin: 10px auto; 
     border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 50px; 
 }
+.logo-redondo img {
+    width: 80px;  /* Antes era 120px */
+    height: 80px; /* Antes era 120px */
+    border-radius: 50%;
+    border: 2px solid var(--dorado);
+    object-fit: cover;
+    margin-bottom: 15px;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+    transition: transform 0.3s ease;
+}
+
+/* Efecto opcional: el logo crece un poco al tocarlo */
+.logo-redondo img:active {
+    transform: scale(1.1);
+}
 
 .scroll-wrapper { display: flex; gap: 10px; padding: 10px 20px; overflow-x: auto; scrollbar-width: none; }
 .scroll-wrapper::-webkit-scrollbar { display: none; }
